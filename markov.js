@@ -47,16 +47,20 @@ class MarkovMachine {
 
   makeText(numWords = 100) {
     // TODO
-    
+    let keys = Array.from(this.chains.keys());
+    let key = MarkovMachine.choice(keys);
+    let out = [];
+
+    while (out.length < numWords && key !== null) {
+        out.push(key);
+        key = MarkovMachine.choice(this.chains.get(key));
+    }
+
+
+     return out.join(" ");
 
   }
 }
 
 let mm = new MarkovMachine("the cat in the hat");
 console.log(mm.makeChains());
-
-let springboard = new MarkovMachine("the cat in the hat is in the hat");
-console.log(springboard.makeChains());
-
-
-console.log(mm.makeText())
